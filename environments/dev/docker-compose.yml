@@ -1,0 +1,40 @@
+# docker compose --env-file ../../.env up --build
+services:
+  
+  api:
+    build:
+      context: ../../                
+      dockerfile: environments/dev/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - ConnectionStrings__DefaultConnection=User ID=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};Server=${POSTGRES_SERVER};Port=${POSTGRES_PORT};Database=${POSTGRES_DB};
+      - ASPNETCORE_URLS=http://+:5000
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+    volumes:
+      - ../../:/src
+    working_dir: /src/API
+    env_file:
+      - ../../.env
+    depends_on:
+      - db
+    restart: always
+    command: dotnet watch --no-hot-reload --project API.csproj run --urls=http://0.0.0.0:5000
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    restart: always
+    env_file:
+      - ../../.env
+    volumes:
+      - eventsapp_data:/var/lib/postgresql/data
+        
+volumes:
+  eventsapp_data:
