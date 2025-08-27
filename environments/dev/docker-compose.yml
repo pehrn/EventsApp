@@ -35,6 +35,9 @@ services:
       - ../../.env
     volumes:
       - eventsapp_data:/var/lib/postgresql/data
+      
+
+
         
 volumes:
   eventsapp_data:

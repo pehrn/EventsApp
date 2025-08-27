@@ -54,5 +54,6 @@ TestResult.xml
 nunit-*.xml
 
 # Custom
+API/appsettings.json
 .idea/
 .env
