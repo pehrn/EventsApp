@@ -17,7 +17,23 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     // to do
-    app.ApplyMigrations();
+    // app.ApplyMigrations();
+    
+    // Migrate & Populate DB with dummy data
+    using var scope = app.Services.CreateScope();
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        await context.Database.MigrateAsync();
+        await DbInitializer.SeedDataAsync(context);
+    }
+    catch (Exception e)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(e, "An error occurred while migrating or seeding the database.");
+    }
+
 }
 
 app.MapControllers();
