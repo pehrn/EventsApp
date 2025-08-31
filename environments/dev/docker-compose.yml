@@ -22,6 +22,25 @@ services:
     restart: always
     command: dotnet watch --no-hot-reload --project API.csproj run --urls=http://0.0.0.0:5000
 
+  client:
+    build:
+      context: ../../
+      dockerfile: environments/dev/Dockerfile.Client
+    ports:
+      - "8081:3000"
+    volumes:
+      - ../../client:/src
+      - /src/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - HOST=0.0.0.0
+    working_dir: /src
+    command: npm run dev # because using vite
+    depends_on:
+      - api
+      - db
+    restart: always
+
   db:
     image: postgres:latest
     environment:

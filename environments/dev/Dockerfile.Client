@@ -1,0 +1,13 @@
+FROM node:alpine AS build
+
+WORKDIR /src
+
+COPY client/package*.json ./
+RUN npm install
+
+COPY client/ .
+
+EXPOSE 3000
+
+# because using vite
+CMD ["npm", "run", "dev"]
