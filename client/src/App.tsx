@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {Typography, List, ListItem, ListItemText} from "@mui/material";
 
 function App() {
     
@@ -13,12 +14,14 @@ function App() {
     
   return (
       <>
-          <h3>EventsApp</h3>
-          <ul>
+          <Typography variant='h3'>EventsApp</Typography>
+          <List>
               {activities.map((activity) => (
-                  <li key={activity.id}>{activity.title}</li>
+                  <ListItem key={activity.id}>
+                      <ListItemText>{activity.title}</ListItemText>
+                  </ListItem>
               ))}
-          </ul>
+          </List>
       </>
   )
 }
