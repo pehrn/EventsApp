@@ -13,7 +13,21 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_USE_POLLING_FILE_WATCHER=1
     volumes:
-      - ../../:/src
+    # Avoid IDE reference issues for hot reload by separating volumes
+    # Mount each source folder separately
+    - ../../API:/src/API
+    - ../../Application:/src/Application
+    - ../../Domain:/src/Domain
+    - ../../Persistence:/src/Persistence
+    # Isolate bin/obj for each project
+    - /src/API/bin
+    - /src/API/obj
+    - /src/Application/bin
+    - /src/Application/obj
+    - /src/Domain/bin
+    - /src/Domain/obj
+    - /src/Persistence/bin
+    - /src/Persistence/obj
     working_dir: /src/API
     env_file:
       - ../../.env
