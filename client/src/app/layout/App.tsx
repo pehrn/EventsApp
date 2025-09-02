@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Typography, List, ListItem, ListItemText} from "@mui/material";
+import {List, ListItem, ListItemText, CssBaseline, Container} from "@mui/material";
+import NavBar from "./NavBar";
 
 function App() {
     
@@ -14,14 +15,17 @@ function App() {
     
   return (
       <>
-          <Typography variant='h3'>EventsApp</Typography>
-          <List>
-              {activities.map((activity) => (
-                  <ListItem key={activity.id}>
-                      <ListItemText>{activity.title}</ListItemText>
-                  </ListItem>
-              ))}
-          </List>
+          <CssBaseline />
+          <NavBar />
+          <Container maxWidth="xl" sx={{mt: 3}}>
+              <List>
+                  {activities.map((activity) => (
+                      <ListItem key={activity.id}>
+                          <ListItemText>{activity.title}</ListItemText>
+                      </ListItem>
+                  ))}
+              </List>
+          </Container>
       </>
   )
 }
