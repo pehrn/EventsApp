@@ -26,7 +26,7 @@ export default function ActivityDashboard({activities, cancelSelectActivity, sel
             </Grid>
             <Grid size={5}>
                 {selectedActivity && !editMode && <ActivityDetail 
-                    activity={selectedActivity}
+                    selectedActivity={selectedActivity}
                     cancelSelectActivity={cancelSelectActivity}
                     openForm={openForm}
                 />
