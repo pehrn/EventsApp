@@ -2,9 +2,9 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { Container, MenuItem } from '@mui/material';
 import { Group } from '@mui/icons-material';
+import MenuItemLink from "../shared/components/MenuItemLink";
 
 export default function NavBar() {
     return (
@@ -14,23 +14,22 @@ export default function NavBar() {
                     <Container maxWidth="xl">
                         <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                             <Box>
-                                <MenuItem sx={{display: 'flex', gap: 2}}>
+                                <MenuItemLink to='/'>
                                     <Group fontSize="large" />
                                     <Typography variant="h4" fontWeight="bold">EventsApp</Typography>
-                                </MenuItem>
+                                </MenuItemLink>
                             </Box>
                             <Box sx={{display: 'flex'}}>
-                                <MenuItem sx={{fontSize: '1.2rem', textTransform: 'uppercase', fontWeight: 'bold'}}>
+                                <MenuItemLink to='/activities'>
                                     Events
-                                </MenuItem>
-                                <MenuItem sx={{fontSize: '1.2rem', textTransform: 'uppercase', fontWeight: 'bold'}}>
-                                    About
-                                </MenuItem>
-                                <MenuItem sx={{fontSize: '1.2rem', textTransform: 'uppercase', fontWeight: 'bold'}}>
-                                    Contact
-                                </MenuItem>
+                                </MenuItemLink>
+                                <MenuItemLink to='/createActivity'>
+                                    Create Activity
+                                </MenuItemLink>
                             </Box>
-                            <Button size="large" variant="contained" color="warning">Create Event</Button>
+                            <MenuItem>
+                                User menu ToDo
+                            </MenuItem>
                         </Toolbar>
                     </Container>
                 </AppBar>
