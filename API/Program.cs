@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.Middleware;
 using Application;
 using Application.Activities.Queries;
 using Application.Activities.Validators;
@@ -23,6 +24,7 @@ builder.Services.AddMediatR(x =>
 });
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 builder.Services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
+builder.Services.AddTransient<ExceptionMiddleware>();
 
 var app = builder.Build();
 
@@ -47,6 +49,8 @@ if (app.Environment.IsDevelopment())
         logger.LogError(e, "An error occurred while migrating or seeding the database.");
     }
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
