@@ -67,7 +67,7 @@ services:
     env_file:
       - ../../.env
     volumes:
-      - eventsapp_data:/var/lib/postgresql/data
+      - eventsapp_data:/var/lib/postgresql
       
 
 
