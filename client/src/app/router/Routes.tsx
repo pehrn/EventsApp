@@ -7,6 +7,8 @@ import ActivityDetailPage from "../../features/activities/details/ActivityDetail
 import Counter from "../../features/counter/Counter";
 import TestErrors from "../../features/errors/TestErrors";
 import NotFound from "../../features/errors/NotFound";
+import ServerError from "../../features/errors/ServerError";
+import { Navigate } from "react-router";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +23,8 @@ export const router = createBrowserRouter([
             { path: 'counter', element: <Counter /> },
             { path: 'errors', element: <TestErrors /> },
             { path: 'not-found', element: <NotFound /> },
+            { path: 'server-error', element: <ServerError /> },
+            { path: '*', element: <Navigate replace to='/not-found' /> },
         ]
     }
 ]);
