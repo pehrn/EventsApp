@@ -48,8 +48,9 @@ if (app.Environment.IsDevelopment())
     try
     {
         var context = services.GetRequiredService<AppDbContext>();
+        var userManager = services.GetRequiredService<UserManager<User>>();
         await context.Database.MigrateAsync();
-        await DbInitializer.SeedDataAsync(context);
+        await DbInitializer.SeedDataAsync(context, userManager);
     }
     catch (Exception e)
     {
